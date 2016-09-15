@@ -1,0 +1,64 @@
+// My rock, paper, scissors function (AKA RPS)
+var RPS = function() {
+    var userChoice = prompt("rock, paper, or scissors?");
+    
+    // ensure valid user input
+    while (userChoice !== "rock" && userChoice !== "paper" && userChoice !== "scissors") {
+        userChoice = prompt("Please try again and enter rock, paper, or scissors.")
+    }
+    
+    // generate random cpu input
+    var cpuChoice = Math.random();
+    
+    // assign value of rock, paper, or scissors
+    if (cpuChoice <= 0.33) {
+        cpuChoice = "rock";
+    } else if (cpuChoice <= 0.66) {
+        cpuChoice = "paper";
+    } else {
+        cpuChoice = "scissors";
+    }
+    
+    // function to decide the winner
+    var compare = function(user, cpu) {
+        // in the event of a tie, user will be prompted to try again
+        if (user === cpu) {
+            var retry = confirm("the result is a tie. Press OK to play again.");
+            if (retry === true) {
+                RPS();
+            } else {
+                console.log("Thanks for playing!");
+                return;
+            }
+        }
+        if (user === "rock") {
+            if (cpu === "paper") {
+                console.log("paper wins");
+            } else {
+                console.log("rock wins");
+            }
+        }
+        else if (user === "paper") {
+            if (cpu === "rock") {
+                console.log("paper wins");
+            } else {
+                console.log("scissors wins");
+            }
+        }
+        else {
+            if (cpu === "rock") {
+                console.log("rock wins");
+            } else {
+                console.log("scissors wins");
+            }
+        }
+    }
+    // print the user and cpu values to the console
+    console.log("You: " + userChoice);
+    console.log("Computer: " + cpuChoice);
+    
+    //decide the winner
+    compare(userChoice, cpuChoice);
+}
+// run the RPS function
+RPS();
